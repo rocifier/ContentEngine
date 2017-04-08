@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NSwag.AspNetCore;
+using System.Reflection;
+using Newtonsoft.Json.Converters;
 
 namespace ContentEngine
 {
@@ -27,8 +30,12 @@ namespace ContentEngine
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc();
+            // Configure json output serialisation to convert all enums to strings, not output their integer values
+            services.AddMvc().AddJsonOptions(o => {
+                o.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+            });
+
+            services.AddApiVersioning();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +43,11 @@ namespace ContentEngine
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            if (env.IsDevelopment())
+            {
+                app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, new SwaggerUiOwinSettings() { });
+            }
 
             app.UseMvc();
         }
