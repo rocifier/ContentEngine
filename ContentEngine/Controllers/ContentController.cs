@@ -9,7 +9,7 @@ namespace ContentEngine.Controllers
 {
     [ApiVersion("1.0")]
     [Route("[controller]")]
-    public class ValuesController : Controller
+    public class ContentController : Controller
     {
         // GET api/values
         [HttpGet]
