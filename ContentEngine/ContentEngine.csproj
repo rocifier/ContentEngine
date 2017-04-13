@@ -19,6 +19,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Persistence\ContentEngine.Persistence.csproj" />
     <ProjectReference Include="..\Persistence.AzureTable\ContentEngine.Persistence.AzureTable.csproj" />
   </ItemGroup>
 

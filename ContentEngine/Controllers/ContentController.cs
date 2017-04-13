@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ContentEngine.Models;
+using ContentEngine.Persistence;
 
 namespace ContentEngine.Controllers
 {
@@ -11,10 +12,19 @@ namespace ContentEngine.Controllers
     [Route("[controller]")]
     public class ContentController : Controller
     {
+        private readonly IContentReader _contentReader;
+        private readonly IContentWriter _contentWriter;
+
+        public ContentController(IContentReader contentReader, IContentWriter contentWriter) {
+            _contentReader = contentReader;
+            _contentWriter = contentWriter;
+        }
+        
         // GET api/values
         [HttpGet]
         public CollectionApiResult<string> Get()
         {
+            //_contentReader.ReadJson()
             return new CollectionApiResult<string>()
             {
                 data = new string[] { "value1", "value2" },
@@ -35,6 +45,7 @@ namespace ContentEngine.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            _contentWriter.WriteJson(Guid.Parse("96d93542-f684-4e17-85c1-51555a4ff281"), Guid.Parse("ae151831-dcc6-4a35-ab79-b5d1a85c3d4b"), value);
         }
 
         // PUT api/values/5

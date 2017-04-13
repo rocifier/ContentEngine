@@ -36,6 +36,13 @@ namespace ContentEngine
             });
 
             services.AddApiVersioning();
+
+            RegisterDependencies(services);
+        }
+
+        // Configure solution wide DI custom classes
+        private void RegisterDependencies(IServiceCollection services) {
+            services.AddSingleton<ContentEngine.Persistence.IContentReader, ContentEngine.Persistence.AzureTable.ContentReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
