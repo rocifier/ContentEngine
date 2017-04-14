@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ContentEngine.Persistence.AzureTable
+namespace ContentEngine.Persistence.AzureTable.Implementation
 {
     public class ContentReader : IContentReader
     {

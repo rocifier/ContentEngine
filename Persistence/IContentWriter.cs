@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ContentEngine.Persistence
 {
@@ -8,6 +9,6 @@ namespace ContentEngine.Persistence
         /// <param name="contentKey">Row Key / Aggregate Root Id</param>
         /// <param name="data">The JSON data to store. </param>
         /// <returns>The JSON representation of the value stored at the requested location.</returns>
-        bool WriteJson(Guid accountId, Guid contentKey, string data);
+        Task<bool> WriteJson(Guid accountId, Guid contentKey, string data);
     }
 }
