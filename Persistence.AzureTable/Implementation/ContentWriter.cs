@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.WindowsAzure.Storage.Table;
 using System.Threading.Tasks;
 using ContentEngine.Persistence.AzureTable.Models;
+using System.Collections.Generic;
 
 namespace ContentEngine.Persistence.AzureTable.Implementation
 {
@@ -40,14 +41,24 @@ namespace ContentEngine.Persistence.AzureTable.Implementation
             }
 
             // 3. for all linked content items, update 'data' and store
+            TableBatchOperation batchOperation = new TableBatchOperation();
             foreach (var link in links) {
                 Guid contentId = Guid.Parse(link.RowKey.FirstPartOfCompositeIndex());
                 var content = await _contentReader.ReadData(accountId, contentId);
                 var mergedData = _dataUpdater.Update(content, contentId, data);
-                await WriteJsonValue(accountId, contentId, mergedData);
+                BatchInsertContent(accountId, contentId, mergedData, batchOperation);
             }
 
-            return true;
+            // commit batch update
+            IList<TableResult> insertContentResults = await _contentTable.ExecuteBatchAsync(batchOperation);
+            if (insertContentResults.Any(r => r.HttpStatusCode != 200))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private async Task<LinkEntity> GenerateRootContent(Guid accountId, Guid contentKey)
@@ -64,20 +75,11 @@ namespace ContentEngine.Persistence.AzureTable.Implementation
             return rootLink;
         }
 
-        private async Task<bool> WriteJsonValue(Guid accountId, Guid contentId, string newFullData)
+        private void BatchInsertContent(Guid accountId, Guid contentId, string newFullData, TableBatchOperation batch)
         {
             var standaloneContent = new ContentEntity(accountId.ToString(), contentId.ToString());
             standaloneContent.Data = newFullData;
-            TableOperation insertContent = TableOperation.InsertOrReplace(standaloneContent);
-            TableResult insertContentResult = await _contentTable.ExecuteAsync(insertContent);
-            if (insertContentResult.HttpStatusCode == 200)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            batch.InsertOrReplace(standaloneContent);
         }
     }
 }
