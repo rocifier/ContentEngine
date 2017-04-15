@@ -25,5 +25,14 @@ namespace ContentEngine.Persistence
                 return false;
             }
         }
+
+        public static string FirstPartOfCompositeIndex(this string strInput)
+        {
+            if (strInput.Contains("_"))
+            {
+                return strInput.Substring(0, strInput.IndexOf('_'));
+            }
+            return "";
+        }
     }
 }

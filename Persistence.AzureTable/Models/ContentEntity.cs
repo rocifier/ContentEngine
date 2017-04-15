@@ -13,8 +13,6 @@ namespace ContentEngine.Persistence.AzureTable.Models
 
         public ContentEntity() { }
 
-        public string Email { get; set; }
-
-        public string PhoneNumber { get; set; }
+        public string Data { get; set; }
     }
 }
