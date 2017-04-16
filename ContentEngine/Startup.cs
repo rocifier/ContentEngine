@@ -42,8 +42,8 @@ namespace ContentEngine
 
         // Configure solution wide DI custom classes
         private void RegisterDependencies(IServiceCollection services) {
-            services.AddSingleton<ContentEngine.Persistence.IContentReader, ContentEngine.Persistence.AzureTable.ContentReader>();
-            services.AddSingleton<ContentEngine.Persistence.IContentWriter, ContentEngine.Persistence.AzureTable.ContentWriter>();
+            services.AddSingleton<Persistence.IContentReader, Persistence.AzureTable.Implementation.ContentReader>();
+            services.AddSingleton<Persistence.IContentWriter, Persistence.AzureTable.Implementation.ContentWriter>();
 
         }
 

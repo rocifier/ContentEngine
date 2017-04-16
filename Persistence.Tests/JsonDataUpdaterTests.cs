@@ -16,10 +16,10 @@ namespace Persistence.Tests
         public void Update_Replaces_Null()
         {
             string normalizedData = null;
-            string content = "{\"key\": \"value\"}";
+            string contentData = "{\"key\": \"value\"}";
             Guid contentId = Guid.NewGuid();
             string result = _jsonDataUpdater.Update(normalizedData, contentId, contentData);
-            Assert.AreEqual(result, content);
+            Assert.Same(result, contentData);
         }
     }
 }
