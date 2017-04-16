@@ -9,6 +9,8 @@ namespace ContentEngine.Persistence
 {
     public class JsonDataUpdater : IDataUpdater
     {
+        public const string IdPropertyName = "id";
+
         public string Update(string denormalizedData, Guid contentId, string contentData)
         {
             if (denormalizedData == null) return contentData;
@@ -26,7 +28,7 @@ namespace ContentEngine.Persistence
             return JsonConvert.SerializeObject(denormalizedToken);
         }
 
-        private static List<JToken> FindTokens(JToken containerToken, string contentId)
+        public IEnumerable<JToken> FindTokens(JToken containerToken, string contentId)
         {
             List<JToken> matches = new List<JToken>();
             FindTokens(containerToken, contentId, matches);
@@ -39,7 +41,7 @@ namespace ContentEngine.Persistence
             {
                 foreach (JProperty child in containerToken.Children<JProperty>())
                 {
-                    if (child.Name == "id" && child.Value.Value<string>() == contentId)
+                    if (child.Name == IdPropertyName && child.Value.Value<string>() == contentId)
                     {
                         matches.Add(child.Value);
                     }
@@ -54,34 +56,6 @@ namespace ContentEngine.Persistence
                 }
             }
         }
-
-        /*
-        private JToken FindContentIdNode(JToken parent, Guid contentIdToFind) {
-
-            Stack<JToken> S = new Stack<JToken>();
-            JToken current = parent;
-            S.Push(current);
-
-            // r
-            if (!parent.HasValues) return null;
-            
-            foreach (KeyValuePair<string, JToken> child in parent)
-            {
-                if (child.Key.ToLower() == "id")
-                {
-                    if (child.Value.Type == JTokenType.Guid || child.Value.Type == JTokenType.String)
-                    {
-                        if (child.Value.Value<string>() == contentIdToFind.ToString())
-                        {
-                            return child.Value;
-                        }
-                    }
-                }
-            }
-
-            return foundToken;
-        }
-        */
-
+        
     }
 }
