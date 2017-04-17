@@ -6,6 +6,7 @@ namespace ContentEngine.Persistence
     {
         public static bool IsValidJson(this string strInput)
         {
+            if (strInput == null) return false;
             strInput = strInput.Trim();
             if ((strInput.StartsWith("{") && strInput.EndsWith("}")) || //For object
                 (strInput.StartsWith("[") && strInput.EndsWith("]"))) //For array
@@ -33,6 +34,11 @@ namespace ContentEngine.Persistence
                 return strInput.Substring(0, strInput.IndexOf('_'));
             }
             return "";
+        }
+
+        public static bool IsSuccessfulHttpStatusCode(this int code)
+        {
+            return (code >= 200 && code <= 299);
         }
     }
 }

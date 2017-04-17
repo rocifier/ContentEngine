@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using NSwag.AspNetCore;
 using System.Reflection;
 using Newtonsoft.Json.Converters;
+using Microsoft.AspNet.Diagnostics;
 
 namespace ContentEngine
 {
@@ -42,9 +43,22 @@ namespace ContentEngine
 
         // Configure solution wide DI custom classes
         private void RegisterDependencies(IServiceCollection services) {
+            services.AddSingleton(Configuration);
+            RegisterGenericPersistence(services);
+            RegisterAzureTableAsPersistenceProvider(services);
+        }
+
+        private void RegisterGenericPersistence(IServiceCollection services)
+        {
+            services.AddSingleton<Persistence.IDataUpdater, Persistence.JsonDataUpdater>();
+        }
+
+        private void RegisterAzureTableAsPersistenceProvider(IServiceCollection services)
+        {
+            services.AddSingleton<Persistence.AzureTable.ITableStorage, Persistence.AzureTable.Implementation.TableStorage>();
+            services.AddSingleton<Persistence.AzureTable.ILinkReader, Persistence.AzureTable.Implementation.LinkReader>();
             services.AddSingleton<Persistence.IContentReader, Persistence.AzureTable.Implementation.ContentReader>();
             services.AddSingleton<Persistence.IContentWriter, Persistence.AzureTable.Implementation.ContentWriter>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

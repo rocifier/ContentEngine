@@ -37,7 +37,7 @@ namespace ContentEngine.Persistence.AzureTable.Implementation
             // 2. if there are no links, add a root link and a content item
             if (!links.Any())
             {
-                links.Add(await GenerateRootContent(accountId, contentKey));
+                links.Add(await GenerateRootContent(accountId, contentKey, data));
             }
 
             // 3. for all linked content items, update 'data' and store
@@ -61,17 +61,19 @@ namespace ContentEngine.Persistence.AzureTable.Implementation
             }
         }
 
-        private async Task<LinkEntity> GenerateRootContent(Guid accountId, Guid contentKey)
+        private async Task<LinkEntity> GenerateRootContent(Guid accountId, Guid contentKey, string initialData)
         {
             Guid newRootContentId = Guid.NewGuid();
             var standaloneContent = new ContentEntity(accountId.ToString(), newRootContentId.ToString());
+            standaloneContent.Data = initialData;
             var rootLink = new LinkEntity(accountId.ToString(), newRootContentId.ToString());
+            rootLink.Primary = true;
             TableOperation insertContent = TableOperation.Insert(standaloneContent);
             TableResult insertContentResult = await _contentTable.ExecuteAsync(insertContent);
-            if (insertContentResult.HttpStatusCode != 200) throw new Exception(insertContentResult.Result.ToString());
+            if (!insertContentResult.HttpStatusCode.IsSuccessfulHttpStatusCode()) throw new Exception(insertContentResult.Result.ToString());
             TableOperation insertRootLink = TableOperation.Insert(rootLink);
             TableResult insertLinkResult = await _linkTable.ExecuteAsync(insertRootLink);
-            if (insertLinkResult.HttpStatusCode != 200) throw new Exception(insertLinkResult.Result.ToString());
+            if (!insertLinkResult.HttpStatusCode.IsSuccessfulHttpStatusCode()) throw new Exception(insertLinkResult.Result.ToString());
             return rootLink;
         }
 
