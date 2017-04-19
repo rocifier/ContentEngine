@@ -45,7 +45,7 @@ namespace ContentEngine.Controllers
         [HttpPost]
         public void Post([FromBody]dynamic data)
         {
-            _contentWriter.WriteJson(Guid.Parse("96d93542-f684-4e17-85c1-51555a4ff281"), Guid.Parse("ae151831-dcc6-4a35-ab79-b5d1a85c3d4b"), data.ToString());
+            _contentWriter.WriteJson(Guid.Parse("96d93542-f684-4e17-85c1-51555a4ff281"), data.ToString());
         }
 
         // PUT api/values/5

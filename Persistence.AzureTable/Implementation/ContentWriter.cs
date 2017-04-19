@@ -27,10 +27,14 @@ namespace ContentEngine.Persistence.AzureTable.Implementation
             _contentTable.CreateIfNotExistsAsync();
         }
 
-        public async Task<bool> WriteJson(Guid accountId, Guid contentKey, string data)
+        public async Task<bool> WriteJson(Guid accountId, string data)
         {
             if (!data.IsValidJson()) return false;
-            
+            if (!data.IsValidContentModel()) return false;
+
+            // Get content key
+            Guid contentKey = data.ExtractContentKey();
+
             // 1. get all links
             var links = await _linkReader.GetLinks(accountId, contentKey);
 
@@ -51,7 +55,7 @@ namespace ContentEngine.Persistence.AzureTable.Implementation
 
             // commit batch update
             IList<TableResult> insertContentResults = await _contentTable.ExecuteBatchAsync(batchOperation);
-            if (insertContentResults.Any(r => r.HttpStatusCode != 200))
+            if (insertContentResults.Any(r => !r.HttpStatusCode.IsSuccessfulHttpStatusCode()))
             {
                 return false;
             }
@@ -63,10 +67,9 @@ namespace ContentEngine.Persistence.AzureTable.Implementation
 
         private async Task<LinkEntity> GenerateRootContent(Guid accountId, Guid contentKey, string initialData)
         {
-            Guid newRootContentId = Guid.NewGuid();
-            var standaloneContent = new ContentEntity(accountId.ToString(), newRootContentId.ToString());
+            var standaloneContent = new ContentEntity(accountId.ToString(), contentKey.ToString());
             standaloneContent.Data = initialData;
-            var rootLink = new LinkEntity(accountId.ToString(), newRootContentId.ToString());
+            var rootLink = new LinkEntity(accountId.ToString(), contentKey.ToString());
             rootLink.Primary = true;
             TableOperation insertContent = TableOperation.Insert(standaloneContent);
             TableResult insertContentResult = await _contentTable.ExecuteAsync(insertContent);

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.IO;
 using System.Collections.Generic;
 
 namespace ContentEngine.Persistence
@@ -17,13 +15,15 @@ namespace ContentEngine.Persistence
             if (contentData == null) return denormalizedData;
             if (!denormalizedData.IsValidJson()) throw new Exception("Target denormalized data to merge content into is not valid JSON");
             if (!contentData.IsValidJson()) throw new Exception("Source content data to update is not valid JSON");
+            if (denormalizedData.IsEqualToStringIgnoringWhitespace(contentData)) return contentData;
 
             JToken contentToken = JToken.Parse(contentData);
             JToken denormalizedToken = JToken.Parse(denormalizedData);
             var matches = FindTokens(denormalizedToken, contentId.ToString());
             foreach (var match in matches)
             {
-                match.Parent.Parent.Replace(contentToken);
+                var contentRoot = match.Parent.Parent;
+                contentRoot.Replace(contentToken);
             }
             return JsonConvert.SerializeObject(denormalizedToken);
         }
