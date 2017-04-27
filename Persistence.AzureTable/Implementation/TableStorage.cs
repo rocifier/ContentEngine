@@ -3,7 +3,7 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.Extensions.Configuration;
 using System;
 
-namespace ContentEngine.Persistence.AzureTable.Implementation
+namespace ContentEngine.Persistence.Azure.Implementation
 {
     public class TableStorage : ITableStorage
     {

@@ -1,10 +1,10 @@
-﻿using ContentEngine.Persistence.AzureTable.Models;
+﻿using ContentEngine.Persistence.Azure.Models;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ContentEngine.Persistence.AzureTable.Implementation
+namespace ContentEngine.Persistence.Azure.Implementation
 {
     public class LinkReader : ILinkReader
     {

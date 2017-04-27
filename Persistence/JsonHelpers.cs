@@ -67,5 +67,13 @@ namespace ContentEngine.Persistence
             string tar = Regex.Replace(target, @"\s", "");
             return String.Equals(src, tar, StringComparison.OrdinalIgnoreCase);
         }
+
+        public static string AddJsonProperty(this string strInput, string key, string value)
+        {
+            var obj = JObject.Parse(strInput);
+            obj.Add(key, value);
+            return obj.ToString();
+        }
+
     }
 }

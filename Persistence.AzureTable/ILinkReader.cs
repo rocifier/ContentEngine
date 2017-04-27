@@ -1,9 +1,9 @@
-﻿using ContentEngine.Persistence.AzureTable.Models;
+﻿using ContentEngine.Persistence.Azure.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ContentEngine.Persistence.AzureTable
+namespace ContentEngine.Persistence.Azure
 {
     public interface ILinkReader
     {

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <Description>Queues persisted items to Azure Table Storage and utilises Azure Service Bus to publish changes into.</Description>
   </PropertyGroup>
 
   <ItemGroup>

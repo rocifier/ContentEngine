@@ -1,9 +1,10 @@
-﻿using ContentEngine.Persistence.AzureTable.Models;
+﻿using ContentEngine.Persistence;
+using ContentEngine.Persistence.Azure.Models;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Threading.Tasks;
 
-namespace ContentEngine.Persistence.AzureTable.Implementation
+namespace ContentEngine.Persistence.Azure.Implementation
 {
     public class ContentReader : IContentReader
     {
@@ -21,7 +22,8 @@ namespace ContentEngine.Persistence.AzureTable.Implementation
         {
             TableOperation retrieveOperation = TableOperation.Retrieve<ContentEntity>(accountId.ToString(), contentKey.ToString());
             TableResult retrievedResult = await _contentTable.ExecuteAsync(retrieveOperation);
-            return ((ContentEntity)retrievedResult.Result).Data;
+            var contentResult = ((ContentEntity)retrievedResult.Result);
+            return contentResult.Data.AddJsonProperty(Constants.ETAG_CLIENT, contentResult.ETag);
         }
     }
 }

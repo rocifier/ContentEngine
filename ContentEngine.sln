@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentEngine", "ContentEng
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentEngine.Persistence", "Persistence\ContentEngine.Persistence.csproj", "{08F5CB40-21CC-41BE-9F0C-A488CDDFB70F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentEngine.Persistence.AzureTable", "Persistence.AzureTable\ContentEngine.Persistence.AzureTable.csproj", "{6F8E58FD-454E-4F33-8A79-EB0821AA7F20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentEngine.Persistence.Azure", "Persistence.AzureTable\ContentEngine.Persistence.Azure.csproj", "{6F8E58FD-454E-4F33-8A79-EB0821AA7F20}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.Tests", "Persistence.Tests\Persistence.Tests.csproj", "{F0DF377B-8934-4D6E-A510-4B0664241A79}"
 EndProject

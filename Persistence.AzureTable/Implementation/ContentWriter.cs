@@ -2,10 +2,10 @@
 using System.Linq;
 using Microsoft.WindowsAzure.Storage.Table;
 using System.Threading.Tasks;
-using ContentEngine.Persistence.AzureTable.Models;
+using ContentEngine.Persistence.Azure.Models;
 using System.Collections.Generic;
 
-namespace ContentEngine.Persistence.AzureTable.Implementation
+namespace ContentEngine.Persistence.Azure.Implementation
 {
     public class ContentWriter : IContentWriter
     {

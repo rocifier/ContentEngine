@@ -1,9 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ContentEngine.Persistence.AzureTable
+namespace ContentEngine.Persistence.Azure
 {
     public interface ITableStorage
     {

@@ -1,7 +1,7 @@
 using System;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace ContentEngine.Persistence.AzureTable.Models
+namespace ContentEngine.Persistence.Azure.Models
 {
     /// Enumerates content entities stored in all aggregates
     public class LinkEntity : TableEntity
