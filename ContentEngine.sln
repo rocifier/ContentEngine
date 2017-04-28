@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentEngine.Persistence.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.Tests", "Persistence.Tests\Persistence.Tests.csproj", "{F0DF377B-8934-4D6E-A510-4B0664241A79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentEngine.Persistence.Azure.TaskRunner", "ContentEngine.Persistence.Azure.TaskRunner\ContentEngine.Persistence.Azure.TaskRunner.csproj", "{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{F0DF377B-8934-4D6E-A510-4B0664241A79}.Release|x64.Build.0 = Release|x64
 		{F0DF377B-8934-4D6E-A510-4B0664241A79}.Release|x86.ActiveCfg = Release|x86
 		{F0DF377B-8934-4D6E-A510-4B0664241A79}.Release|x86.Build.0 = Release|x86
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Debug|x64.ActiveCfg = Debug|x64
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Debug|x64.Build.0 = Debug|x64
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Debug|x86.ActiveCfg = Debug|x86
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Debug|x86.Build.0 = Debug|x86
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Release|x64.ActiveCfg = Release|x64
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Release|x64.Build.0 = Release|x64
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Release|x86.ActiveCfg = Release|x86
+		{8F879FDA-810B-4EBE-BAEF-B06C4530A4D1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

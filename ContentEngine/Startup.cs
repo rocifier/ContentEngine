@@ -55,10 +55,10 @@ namespace ContentEngine
 
         private void RegisterAzureTableAsPersistenceProvider(IServiceCollection services)
         {
-            services.AddSingleton<Persistence.AzureTable.ITableStorage, Persistence.AzureTable.Implementation.TableStorage>();
-            services.AddSingleton<Persistence.AzureTable.ILinkReader, Persistence.AzureTable.Implementation.LinkReader>();
-            services.AddSingleton<Persistence.IContentReader, Persistence.AzureTable.Implementation.ContentReader>();
-            services.AddSingleton<Persistence.IContentWriter, Persistence.AzureTable.Implementation.ContentWriter>();
+            services.AddSingleton<Persistence.Azure.ITableStorage, Persistence.Azure.Implementation.TableStorage>();
+            services.AddSingleton<Persistence.Azure.ILinkReader, Persistence.Azure.Implementation.LinkReader>();
+            services.AddSingleton<Persistence.IContentReader, Persistence.Azure.Implementation.ContentReader>();
+            services.AddSingleton<Persistence.IContentWriter, Persistence.Azure.Implementation.ContentWriter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
