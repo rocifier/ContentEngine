@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using ContentEngine.Persistence.Azure.TaskRunner.Implementation;
 
 namespace ContentEngine.Persistence.Azure.TaskRunner
 {
@@ -6,7 +7,9 @@ namespace ContentEngine.Persistence.Azure.TaskRunner
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var serviceCollection = new ServiceCollection();
+            var serviceProvider = serviceCollection.AddSingleton<IServiceBusSubscriber, ServiceBusSubscriber>().BuildServiceProvider();
+            serviceProvider.GetService<IServiceBusSubscriber>().BeginBackgroundProcessing();
         }
     }
 }
