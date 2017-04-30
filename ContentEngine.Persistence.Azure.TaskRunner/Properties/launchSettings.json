@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ContentEngine.Persistence.Azure.TaskRunner": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

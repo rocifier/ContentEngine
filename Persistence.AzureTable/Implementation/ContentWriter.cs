@@ -4,7 +4,6 @@ using Microsoft.WindowsAzure.Storage.Table;
 using System.Threading.Tasks;
 using ContentEngine.Persistence.Azure.Models;
 using System.Collections.Generic;
-using Microsoft.Azure.Management.ServiceBus;
 
 namespace ContentEngine.Persistence.Azure.Implementation
 {
