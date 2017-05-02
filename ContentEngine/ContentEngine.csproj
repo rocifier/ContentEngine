@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <PackageTargetFallback>dotnet5.6</PackageTargetFallback>
+    <UserSecretsId>15b47151-a843-4ea6-bcd3-ef562fb6380c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,11 +17,13 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="1.1.0-beta1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.0.1" />
     <PackageReference Include="NSwag.AspNetCore" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0-msbuild3-final" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Persistence.AzureTable\ContentEngine.Persistence.Azure.csproj" />

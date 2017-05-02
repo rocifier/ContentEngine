@@ -14,7 +14,7 @@ namespace ContentEngine.Persistence.Azure.TaskRunner.Implementation
         public ServiceBusSubscriber(IConfigurationRoot configuration)
         {
             _configuration = configuration;
-            string connectionString = _configuration.GetConnectionString("AzureServiceBus");
+            string connectionString = _configuration["ConnectionString.AzureServiceBus"];
             _client = new SubscriptionClient(connectionString, "DenormalizeContent", "ContentWriter");
         }
 

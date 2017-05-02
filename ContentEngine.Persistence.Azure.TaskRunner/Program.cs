@@ -13,6 +13,10 @@ namespace ContentEngine.Persistence.Azure.TaskRunner
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{environmentName}.json", optional: true);
+            if (environmentName == "Development")
+            {
+                builder.AddUserSecrets<Program>();
+            }
             IConfigurationRoot Configuration = builder.Build();
 
             var serviceCollection = new ServiceCollection();

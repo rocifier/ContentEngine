@@ -11,7 +11,7 @@ namespace ContentEngine.Persistence.Azure.Implementation
 
         public TableStorage(IConfigurationRoot configuration)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(configuration.GetConnectionString("AzureStorage"));
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(configuration["ConnectionString.AzureStorage"]);
             TableClient = storageAccount.CreateCloudTableClient();
         }
         
