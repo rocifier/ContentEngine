@@ -10,9 +10,7 @@ namespace ContentEngine.Persistence.Azure.TaskRunner
         static void Main(string[] args)
         {
             string environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{environmentName}.json", optional: true);
+            var builder = new ConfigurationBuilder();
             if (environmentName == "Development")
             {
                 builder.AddUserSecrets<Program>();
